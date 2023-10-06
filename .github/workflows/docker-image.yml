@@ -22,7 +22,7 @@ jobs:
       with:
         image: ml/chatglm2-6b
         tags: v1
-        registry: cr-cn-beijing.volces.com
+        registry: cr-ee-cn-beijing.cr.volces.com
         dockerfile: Dockerfile
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
