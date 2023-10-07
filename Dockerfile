@@ -10,6 +10,4 @@ RUN ln -s /usr/bin/python3.10 /usr/bin/python
 RUN useradd -ms /bin/bash usera
 WORKDIR /app
 ADD . .
-RUN pip config set global.index-url https://mirrors.cloud.tencent.com/pypi/simple
-RUN pip config set global.trusted-host mirrors.cloud.tencent.com
-RUN pip install -r requirements.txt
+RUN pip install -r requirements.txt -i https://mirrors.aliyun.com/pypi/simple/
