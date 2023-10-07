@@ -1,12 +1,7 @@
-FROM nvcr.io/nvidia/pytorch:23.06-py3
-
-WORKDIR /app
-
-COPY . .
-
-RUN pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple && \
-    pip install -r requirements.txt
-
-EXPOSE 7860 8000
-
-CMD python web_demo.py
+FROM paas-cn-beijing.cr.volces.com/rdma/pytorch:nvidia
+RUN apt-get update && apt-get install -y git net-tools curl 
+RUN git clone https://github.com/THUDM/ChatGLM2-6B && cd ChatGLM2-6B && pip install -r requirements.txt && pip install transformers==4.28.1
+RUN pip uninstall -y transformer-engine
+WORKDIR /workspace/
+COPY web_demo2.py /workspace/
+CMD ["streamlit","run","web_demo2.py"]
