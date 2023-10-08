@@ -19,7 +19,7 @@ jobs:
     - name: Create kubeconfig
       run: |
         mkdir ${HOME}/.kube
-        echo ${{ secrets.KUBE_CONFIG_BJ_STAR_POC }} > ${HOME}/.kube/config
+        echo ${{ secrets.KUBE_CONFIG_BJ_STAR_POC }} | base64 --decode > ${HOME}/.kube/config
     - name: Use context
       run: kubectl config use-context cck05qihqh4vnis1kvch0@1007107-kck0hibj3830ifk6eqgtg
     - name: Deploy to K8s
