@@ -13,6 +13,6 @@ spec:
       bucket: chatglm2
       path: /data
       url: http://tos-s3-cn-beijing.ivolces.com
-    volumeHandle: chatglm2
+    volumeHandle: chatglm2-6b
   persistentVolumeReclaimPolicy: Retain
   volumeMode: Filesystem
