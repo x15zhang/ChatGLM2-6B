@@ -9,6 +9,9 @@ spec:
     storage: 20Gi
   csi:
     driver: tos.csi.volcengine.com
+    nodePublishSecretRef:
+      name: tos-secret
+      namespace: default
     volumeAttributes:
       bucket: chatglm2
       path: /data
