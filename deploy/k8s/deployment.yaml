@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: chatglm2-6b
+spec:
+  selector:
+    matchLabels:
+      app: chatglm2-6b
+  template:
+    metadata:
+      labels:
+        app: chatglm2-6b
+    spec:
+      containers:
+      - image: z00407144/chatglm2-6b:v1
+        imagePullPolicy: IfNotPresent
+        name: chatglm2
+        command:
+        - /bin/sh
+        args:
+        - -c
+        - streamlit run web_demo2.py
+        resources:
+          limits:
+            nvidia.com/gpu: "1"
+        volumeMounts:
+        - mountPath: /workspace/data
+          name: chatglm2-6b
+      dnsPolicy: ClusterFirst
+      volumes:
+      - name: chatglm2-6b
+        persistentVolumeClaim:
+          claimName: chatglm2-6b
