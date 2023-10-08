@@ -1,0 +1,26 @@
+name: Deploy to Kubernetes
+
+on:
+  workflow_dispatch:
+  
+  pull_request:
+    branches: [ main ]
+    paths:
+      - 'deploy/k8s'
+      - '.github/workflows/deploy_k8s.yml'
+
+jobs:
+  deploy:
+    name: Deploy to Kubernetes
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - name: Create kubeconfig
+      run: |
+        mkdir ${HOME}/.kube
+        echo ${{ secrets.KUBE_CONFIG_BJ_STAR_DEMO }} | base64 --decode > ${HOME}/.kube/config
+    - name: Use context
+      run: kubectl config use-context ccbhq0cnqtofrgioh4p5g@1007107-kcgle85ersfelh9eoekug
+    - name: Deploy to K8s
+      run: kubectl apply -f deploy/k8s
